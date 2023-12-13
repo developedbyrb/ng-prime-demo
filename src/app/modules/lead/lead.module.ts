@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { LeadRoutingModule } from './lead-routing.module';
 import { LeadComponent } from './lead.component';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { LeadComponent } from './lead.component';
   ],
   imports: [
     CommonModule,
-    LeadRoutingModule
+    LeadRoutingModule,
+    TableModule,
+    ButtonModule
   ]
 })
 export class LeadModule { }
