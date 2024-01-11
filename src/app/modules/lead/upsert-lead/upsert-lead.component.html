@@ -1,0 +1,167 @@
+<div class="container-fluid">
+    <div class="surface-card p-4 shadow-2 border-round">
+        <div class="flex justify-content-between">
+            <div class="flex align-self-center text-700 text-xl font-medium">Add Number</div>
+            <div class="flex">
+                <button pButton pRipple label="Add More" class="p-button-primary mr-2"
+                    (click)="addMoreNumbers()"></button>
+                <button pButton pRipple label="Load" class="p-button-success mr-2" (click)="submitDetails()"></button>
+                <button pButton pRipple label="Reset" class="p-button-secondary" (click)="resetDetails()"></button>
+            </div>
+        </div>
+        <p-divider></p-divider>
+        <form [formGroup]="loadDetailsForm">
+            <div formArrayName="user_details"
+                *ngFor="let item of getFormData.controls; index as i; first as isFirst; last as isLast">
+                <div class="flex flex-wrap gap-3 p-fluid mt-2" [formGroupName]="i">
+                    <div class="flex-auto">
+                        <p-inputNumber inputId="mobile_number" class="p-inputtext-sm" placeholder="e.x. 1234567890">
+                        </p-inputNumber>
+                    </div>
+                    <div class="flex-auto">
+                        <input pInputText type="text" class="p-inputtext-sm" placeholder="Enter Name" />
+                    </div>
+                    <div class="flex-auto">
+                        <input pInputText type="text" class="p-inputtext-sm"
+                            placeholder="Enter Relation With Student" />
+                    </div>
+                    <div class="flex-auto align-self-center" *ngIf="showRemoveButton">
+                        <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true"
+                            (click)="removeOrClearNumbers(i)"></p-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="surface-card p-4 shadow-2 border-round mt-2">
+        <div class="flex justify-content-between">
+            <div class="flex align-self-center text-700 text-xl font-medium">Basic Details</div>
+        </div>
+        <p-divider></p-divider>
+        <div class="grid">
+            <div class="col-12 flex">
+                <div class="col-4">
+                    <div class="flex-auto flex flex-column gap-1">
+                        <label htmlFor="username">Username</label>
+                        <input pInputText type="text" id="username" class="p-inputtext-sm" placeholder="Enter Name" />
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="flex-auto flex flex-column gap-1">
+                        <label htmlFor="email">Email</label>
+                        <input pInputText type="text" id="email" class="p-inputtext-sm"
+                            placeholder="Enter Email address" />
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="flex-auto flex flex-column gap-1">
+                        <label htmlFor="source">Source</label>
+                        <p-dropdown [options]="sources" id="source" optionLabel="name" class="p-dropdown-sm"
+                            placeholder="Select a City"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-12 flex">
+                <div class="col-4">
+                    <div class="flex-auto flex flex-column gap-1">
+                        <label htmlFor="board">Current Board</label>
+                        <p-dropdown [options]="sources" id="board" optionLabel="name" class="p-dropdown-sm"
+                            placeholder="Select a City"></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="flex-auto flex flex-column gap-1">
+                        <label htmlFor="standard">Current Standard</label>
+                        <p-dropdown [options]="sources" id="standard" optionLabel="name" class="p-dropdown-sm"
+                            placeholder="Select a City"></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="flex-auto flex flex-column gap-1">
+                        <label htmlFor="stream">Current Stream</label>
+                        <p-dropdown [options]="sources" id="stream" optionLabel="name" class="p-dropdown-sm"
+                            placeholder="Select a City"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-12 flex">
+                <div class="col-4">
+                    <div class="flex-auto flex flex-column gap-1">
+                        <label htmlFor="subject">Current Subject</label>
+                        <p-dropdown [options]="sources" id="subject" optionLabel="name" class="p-dropdown-sm"
+                            placeholder="Select a City"></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="flex-auto flex flex-column gap-1">
+                        <label htmlFor="city">City</label>
+                        <p-dropdown [options]="sources" id="city" optionLabel="name" class="p-dropdown-sm"
+                            placeholder="Select a City"></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="flex-auto flex flex-column gap-1">
+                        <label htmlFor="pincode">Pincode</label>
+                        <input pInputText type="text" id="pincode" class="p-inputtext-sm" placeholder="Enter Pincode" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-2 grid">
+        <div class="col-4">
+            <div class="surface-card p-4 shadow-2 border-round mt-2">
+                <div class="flex justify-content-between">
+                    <div class="flex align-self-center text-700 text-xl font-medium">Last Conversation</div>
+                </div>
+                <p-divider></p-divider>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="surface-card p-4 shadow-2 border-round mt-2">
+                <div class="flex justify-content-between">
+                    <div class="flex align-self-center text-700 text-xl font-medium">Update Lead Details</div>
+                </div>
+                <p-divider></p-divider>
+                <div class="grid">
+                    <div class="col-12">
+                        <div class="flex-auto flex flex-column gap-1">
+                            <label htmlFor="today-description">What did you asked today?</label>
+                            <textarea rows="4" cols="30" pInputTextarea id="today-description"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 flex">
+                        <div class="col-4">
+                            <div class="flex-auto flex flex-column gap-1">
+                                <label htmlFor="source">Lead Type</label>
+                                <p-dropdown [options]="sources" id="source" optionLabel="name" class="p-dropdown-sm"
+                                    placeholder="Select a City"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="flex-auto flex flex-column gap-1">
+                                <label htmlFor="source">Lead Status</label>
+                                <p-dropdown [options]="sources" id="source" optionLabel="name" class="p-dropdown-sm"
+                                    placeholder="Select a City"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="flex-auto flex flex-column gap-1">
+                            <label htmlFor="next-description">Next Schedule Description</label>
+                            <textarea rows="4" cols="30" pInputTextarea id="next-description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
